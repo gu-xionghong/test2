@@ -1,0 +1,122 @@
+---
+layout: default
+title: Research
+---
+
+<div class="container">
+  <h1>Research</h1>
+  
+  <div class="research-filters">
+    <div class="filter-by-year">
+      <h3>Filter by Year</h3>
+      <div class="year-buttons">
+        <button class="year-button active" data-year="all">All Years</button>
+        {% assign years = site.research | group_by_exp: "item", "item.date | date: '%Y'" | sort: "name" | reverse %}
+        {% for year in years %}
+        <button class="year-button" data-year="{{ year.name }}">{{ year.name }}</button>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="filter-by-topic">
+      <h3>Filter by Topic</h3>
+      <div class="topic-buttons">
+        <button class="topic-button active" data-topic="all">All Topics</button>
+        {% assign all_tags = site.research | map: 'tags' | join: ',' | split: ',' | uniq | sort %}
+        {% for tag in all_tags %}
+        {% if tag != '' %}
+        <button class="topic-button" data-topic="{{ tag }}">{{ tag }}</button>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="research-grid">
+    {% assign sorted_research = site.research | sort: 'date' | reverse %}
+    {% for paper in sorted_research %}
+    <div class="research-card" data-year="{{ paper.date | date: '%Y' }}" data-tags="{{ paper.tags | join: ' ' }}">
+      {% if paper.image %}
+      <img src="{{ paper.image | relative_url }}" alt="{{ paper.title }}" class="research-card-image">
+      {% else %}
+      <div class="research-card-image" style="background-color: #{{ paper.color | default: '3498db' }};"></div>
+      {% endif %}
+      <div class="research-card-content">
+        <h3 class="research-card-title"><a href="{{ paper.url | relative_url }}">{{ paper.title }}</a></h3>
+        {% if paper.authors %}
+        <div class="research-card-authors">{{ paper.authors }}</div>
+        {% endif %}
+        {% if paper.venue %}
+        <div class="research-card-venue">{{ paper.venue }}</div>
+        {% endif %}
+        <p class="research-card-excerpt">{{ paper.excerpt | truncate: 150 }}</p>
+        <div class="research-card-links">
+          {% if paper.pdf %}
+          <a href="{{ paper.pdf }}" class="research-card-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          {% endif %}
+          {% if paper.code %}
+          <a href="{{ paper.code }}" class="research-card-link" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> Code
+          </a>
+          {% endif %}
+          {% if paper.slides %}
+          <a href="{{ paper.slides }}" class="research-card-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-desktop"></i> Slides
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if site.research.size == 0 %}
+  <div class="no-research">
+    <p>No research papers available yet. Check back soon!</p>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+// Research filtering functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const yearButtons = document.querySelectorAll('.year-button');
+  const topicButtons = document.querySelectorAll('.topic-button');
+  const researchCards = document.querySelectorAll('.research-card');
+  
+  let activeYear = 'all';
+  let activeTopic = 'all';
+  
+  function filterResearch() {
+    researchCards.forEach(card => {
+      const cardYear = card.getAttribute('data-year');
+      const cardTags = card.getAttribute('data-tags').toLowerCase();
+      
+      const yearMatch = activeYear === 'all' || cardYear === activeYear;
+      const topicMatch = activeTopic === 'all' || cardTags.includes(activeTopic.toLowerCase());
+      
+      card.style.display = yearMatch && topicMatch ? 'block' : 'none';
+    });
+  }
+  
+  yearButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      yearButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      activeYear = this.getAttribute('data-year');
+      filterResearch();
+    });
+  });
+  
+  topicButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      topicButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      activeTopic = this.getAttribute('data-topic');
+      filterResearch();
+    });
+  });
+});
+</script>

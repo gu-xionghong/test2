@@ -1,0 +1,46 @@
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3 class="footer-title">About</h3>
+        <p class="footer-description">
+          A research portfolio showcasing academic papers, projects, and professional work.
+        </p>
+      </div>
+      
+      <div class="footer-section links">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="{{ "/" | relative_url }}" class="footer-link">Home</a></li>
+          <li><a href="{{ "/research/" | relative_url }}" class="footer-link">Research</a></li>
+          <li><a href="{{ "/about/" | relative_url }}" class="footer-link">About</a></li>
+          <li><a href="{{ "/contact/" | relative_url }}" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section social">
+        <h3 class="footer-title">Connect</h3>
+        <div class="social-links">
+          <a href="https://github.com/yourusername" class="social-link" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://scholar.google.com/citations?user=youruserid" class="social-link" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="mailto:youremail@example.com" class="social-link">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; {{ site.time | date: "%Y" }} {{ site.title }}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

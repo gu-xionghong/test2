@@ -1,0 +1,98 @@
+---
+layout: default
+title: Home
+---
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Welcome to My Research Portfolio</h1>
+    <p class="hero-subtitle">
+      Exploring innovative solutions and cutting-edge research in [Your Field of Expertise]
+    </p>
+  </div>
+</section>
+
+<div class="container">
+  <section class="about-preview">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <div class="about-image">
+        <img src="{{ "assets/images/profile.jpg" | relative_url }}" alt="Profile Picture" class="about-photo">
+      </div>
+      <div class="about-bio">
+        <h3 class="about-name">[Your Full Name]</h3>
+        <p class="about-position">[Your Position/Title]</p>
+        <p class="about-description">
+          I am a researcher/scholar working in the field of [Your Field of Expertise]. My work focuses on [brief description of your research interests]. I have published several papers in top conferences/journals and have been involved in various research projects.
+        </p>
+        <a href="{{ "/about/" | relative_url }}" class="btn btn-primary">Learn More About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="recent-research">
+    <h2>Recent Research</h2>
+    <div class="research-grid">
+      {% assign sorted_research = site.research | sort: 'date' | reverse | limit: 3 %}
+      {% for paper in sorted_research %}
+      <div class="research-card">
+        {% if paper.image %}
+        <img src="{{ paper.image | relative_url }}" alt="{{ paper.title }}" class="research-card-image">
+        {% else %}
+        <div class="research-card-image" style="background-color: #{{ paper.color | default: '3498db' }};"></div>
+        {% endif %}
+        <div class="research-card-content">
+          <h3 class="research-card-title"><a href="{{ paper.url | relative_url }}">{{ paper.title }}</a></h3>
+          {% if paper.authors %}
+          <div class="research-card-authors">{{ paper.authors }}</div>
+          {% endif %}
+          {% if paper.venue %}
+          <div class="research-card-venue">{{ paper.venue }}</div>
+          {% endif %}
+          <p class="research-card-excerpt">{{ paper.excerpt | truncate: 150 }}</p>
+          <div class="research-card-links">
+            {% if paper.pdf %}
+            <a href="{{ paper.pdf }}" class="research-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-file-pdf"></i> PDF
+            </a>
+            {% endif %}
+            {% if paper.code %}
+            <a href="{{ paper.code }}" class="research-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i> Code
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center">
+      <a href="{{ "/research/" | relative_url }}" class="btn btn-primary">View All Research</a>
+    </div>
+  </section>
+
+  <section class="research-interests">
+    <h2>Research Interests</h2>
+    <div class="interests-list">
+      <span class="interest-item">[Research Interest 1]</span>
+      <span class="interest-item">[Research Interest 2]</span>
+      <span class="interest-item">[Research Interest 3]</span>
+      <span class="interest-item">[Research Interest 4]</span>
+      <span class="interest-item">[Research Interest 5]</span>
+    </div>
+  </section>
+
+  <section class="news">
+    <h2>Latest News</h2>
+    <div class="news-items">
+      <div class="news-item">
+        <span class="news-date">[Date]</span>
+        <p class="news-content">[Brief news item about a recent achievement, publication, or event]</p>
+      </div>
+      <div class="news-item">
+        <span class="news-date">[Date]</span>
+        <p class="news-content">[Another news item about a conference presentation, award, or collaboration]</p>
+      </div>
+    </div>
+  </section>
+</div>

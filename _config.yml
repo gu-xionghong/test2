@@ -1,0 +1,45 @@
+title: "Research Portfolio"
+description: "Personal research webpage showcasing papers and projects"
+url: "https://yourusername.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+paginate: 5
+paginate_path: "/page:num/"
+
+# Collections
+collections:
+  research:
+    output: true
+    permalink: /research/:path/
+
+# Exclude from processing.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - package.json
+  - package-lock.json
+  - .gitignore
+  - .travis.yml
+  - .jekyll-cache
+  - .sass-cache
+  - .vscode
+  - .DS_Store
+
+# Sass settings
+sass:
+  sass_dir: _sass
+  style: compressed

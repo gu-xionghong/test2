@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+<article class="research-paper">
+  <header class="research-header">
+    <h1 class="research-title">{{ page.title }}</h1>
+    
+    {% if page.authors %}
+    <div class="research-authors">
+      {{ page.authors }}
+    </div>
+    {% endif %}
+    
+    {% if page.venue %}
+    <div class="research-venue">
+      <i class="fas fa-map-marker-alt"></i> {{ page.venue }}
+    </div>
+    {% endif %}
+    
+    {% if page.date %}
+    <div class="research-date">
+      <i class="fas fa-calendar"></i> {{ page.date | date: "%Y" }}
+    </div>
+    {% endif %}
+    
+    <div class="research-links">
+      {% if page.pdf %}
+      <a href="{{ page.pdf }}" class="research-link" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-file-pdf"></i> PDF
+      </a>
+      {% endif %}
+      
+      {% if page.code %}
+      <a href="{{ page.code }}" class="research-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> Code
+      </a>
+      {% endif %}
+      
+      {% if page.slides %}
+      <a href="{{ page.slides }}" class="research-link" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-desktop"></i> Slides
+      </a>
+      {% endif %}
+    </div>
+  </header>
+  
+  {% if page.image %}
+  <div class="research-image">
+    <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="research-thumbnail">
+  </div>
+  {% endif %}
+  
+  <div class="research-content">
+    {{ content }}
+  </div>
+  
+  {% if page.tags %}
+  <div class="research-tags">
+    {% for tag in page.tags %}
+    <span class="tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>
+
+<div class="related-research">
+  <h3 class="related-title">Related Research</h3>
+  <div class="related-grid">
+    {% assign related_posts = site.research | where_exp: "post", "post.url != page.url" | sample: 3 %}
+    {% for post in related_posts %}
+    <a href="{{ post.url | relative_url }}" class="related-item">
+      <h4 class="related-item-title">{{ post.title }}</h4>
+      <p class="related-item-excerpt">{{ post.excerpt | truncate: 100 }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</div>

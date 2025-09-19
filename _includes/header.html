@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="header-container">
+    <a href="{{ "/" | relative_url }}" class="header-logo">
+      <span class="logo-text">Research<span class="highlight">Portfolio</span></span>
+    </a>
+    
+    <nav class="header-nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="{{ "/" | relative_url }}" class="nav-link {% if page.url == "/" %}active{% endif %}">Home</a></li>
+        <li class="nav-item"><a href="{{ "/research/" | relative_url }}" class="nav-link {% if page.url contains "/research/" %}active{% endif %}">Research</a></li>
+        <li class="nav-item"><a href="{{ "/about/" | relative_url }}" class="nav-link {% if page.url == "/about/" %}active{% endif %}">About</a></li>
+        <li class="nav-item"><a href="{{ "/contact/" | relative_url }}" class="nav-link {% if page.url == "/contact/" %}active{% endif %}">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <button class="mobile-menu-button" aria-label="Toggle menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  
+  <div class="mobile-menu">
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item"><a href="{{ "/" | relative_url }}" class="mobile-nav-link {% if page.url == "/" %}active{% endif %}">Home</a></li>
+      <li class="mobile-nav-item"><a href="{{ "/research/" | relative_url }}" class="mobile-nav-link {% if page.url contains "/research/" %}active{% endif %}">Research</a></li>
+      <li class="mobile-nav-item"><a href="{{ "/about/" | relative_url }}" class="mobile-nav-link {% if page.url == "/about/" %}active{% endif %}">About</a></li>
+      <li class="mobile-nav-item"><a href="{{ "/contact/" | relative_url }}" class="mobile-nav-link {% if page.url == "/contact/" %}active{% endif %}">Contact</a></li>
+    </ul>
+  </div>
+</header>
